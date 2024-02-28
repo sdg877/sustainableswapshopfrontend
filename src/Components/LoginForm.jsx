@@ -1,5 +1,7 @@
+
 import axios from "axios";
 import { useState } from "react";
+import '../App/App.css'
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -11,8 +13,8 @@ export const LoginForm = () => {
       username: username,
       password: password,
     };
-    // Create the POST requuest
-    const { data } = await axios.post(`http://localhost:8000/token/`, user,
+
+    const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/token/`, user,
     {
       headers: { "Content-Type": "application/json" },
     },
@@ -21,7 +23,7 @@ export const LoginForm = () => {
     },
     );
 
-    // Initialize the access & refresh token in localstorage.
+
     localStorage.clear();
     localStorage.setItem("access_token", data.access);
     localStorage.setItem("refresh_token", data.refresh);
@@ -29,41 +31,42 @@ export const LoginForm = () => {
     window.location.href = "/";
   };
   return (
-    <div className="Auth-form-container">
+    <div className="container mt-5">
       <form className="Auth-form" onSubmit={submit}>
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign In</h3>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
-            <input
-              id="username"
-              className="form-control"
-              placeholder="Enter Username"
-              name="username"
-              type="text"
-              value={username}
-              required
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              className="form-control"
-              placeholder="Enter password"
-              value={password}
-              required
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">
-              Sign In
-            </button>
-          </div>
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
+            Username
+          </label>
+          <input
+            id="username"
+            className="form-control"
+            placeholder="Enter Username"
+            name="username"
+            type="text"
+            value={username}
+            required
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            className="form-control"
+            placeholder="Enter password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="d-grid gap-2 mt-3">
+          <button type="submit" className="btn btn-primary btn-lg">
+            Sign In
+          </button>
         </div>
       </form>
     </div>
@@ -71,3 +74,4 @@ export const LoginForm = () => {
 };
 
 export default LoginForm;
+

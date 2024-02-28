@@ -17,11 +17,10 @@ function ItemList() {
   }, []);
 
   return (
-    <div>
-      <h1>Items</h1>
-      <div>
+    <div className="centered-item-card-container">
+      <div className="card-container">
         {items.map(item => (
-          <div className="item-card" key={item.id}> {/* Apply item-card class here */}
+          <div className="item-card" key={item.id}> 
             <Link to={`/items/${item.id}`}>
               <h2>{item.item_title}</h2>
             </Link>

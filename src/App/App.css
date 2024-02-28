@@ -1,15 +1,8 @@
 .App {
   text-align: center;
   background-color: #f3f0ff;
-  min-height: 100vh; 
-  font-family: 'Kalnia', sans-serif;
-}
-
-.form-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: row; 
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .item-card {
@@ -17,10 +10,89 @@
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
+  width: calc(33.33% - 20px); /* Calculate width for each card */
   max-width: 200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .item-card h2 {
   margin-bottom: 10px;
+}
+
+.centered-item-card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 800px; /* Set maximum width for card container */
+  margin: auto; /* Center the card container */
+}
+
+.Auth-form {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #d0bfff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Auth-form-title {
+  text-align: center;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 20px; /* Add margin-bottom for spacing */
+}
+
+.btn {
+  font-family: 'Kalnia', sans-serif;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background-color: white;
+  border-color: blueviolet;
+  color: blueviolet;
+}
+
+.btn-primary:hover {
+  background-color: white;
+  border-color: #6f42c1;
+}
+
+.Auth-form input[type="text"],
+.Auth-form input[type="password"],
+.Auth-form textarea {
+  font-family: 'Kalnia', sans-serif;
+}
+
+.item-card.enlarged {
+  width: 75%; 
+  max-width: 600px; 
+}
+.custom-navbar {
+  background: linear-gradient(to bottom, #6f42c1, #f3f0ff); 
+}
+
+.custom-navbar .nav-link {
+  color: black; 
+  margin-left: 15px; 
+}
+
+.custom-navbar .nav-link:hover {
+  color: palevioletred;
+}
+
+.custom-navbar .navbar-toggler {
+  background-color: transparent !important; /* Set background color of the navbar toggle button to transparent */
+  border-color: transparent !important; /* Set border color of the navbar toggle button to transparent */
 }
