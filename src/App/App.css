@@ -10,7 +10,7 @@
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
-  width: calc(33.33% - 20px); /* Calculate width for each card */
+  width: calc(33.33% - 20px);
   max-width: 200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -28,8 +28,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 800px; /* Set maximum width for card container */
-  margin: auto; /* Center the card container */
+  max-width: 800px; 
+  margin: auto; 
 }
 
 .Auth-form {
@@ -54,7 +54,7 @@
 }
 
 .btn {
-  font-family: 'Kalnia', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin-top: 10px;
 }
 
@@ -72,7 +72,7 @@
 .Auth-form input[type="text"],
 .Auth-form input[type="password"],
 .Auth-form textarea {
-  font-family: 'Kalnia', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .item-card.enlarged {
@@ -93,6 +93,6 @@
 }
 
 .custom-navbar .navbar-toggler {
-  background-color: transparent !important; /* Set background color of the navbar toggle button to transparent */
-  border-color: transparent !important; /* Set border color of the navbar toggle button to transparent */
+  background-color: transparent !important;
+  border-color: transparent !important;
 }

@@ -1,35 +1,51 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { currentUser } from '../lib/currentUser.js'; // Import the currentUser function
+
+import { useParams } from 'react-router-dom';
+
 
 function SwapForm({ onSubmit, ownerId }) {
   const [itemTitle, setItemTitle] = useState('');
   const [itemDescription, setItemDescription] = useState('');
   const [offerAccepted, setOfferAccepted] = useState(false);
   const [userId, setUserId] = useState(null); // Store the user ID
+  const { itemId } = useParams()
+  const item_id = itemId
 
-  useEffect(() => {
-    // Fetch the current user's ID when the component mounts
-    const fetchUserId = async () => {
-      const id = await currentUser();
-      setUserId(id);
-    };
-    fetchUserId();
-  }, []); // Run once when the component mounts
+  const currentUserId = currentUser()
+  const initialState = { 
+    item_id: itemId,
+    item_title: '', 
+    item_description: '', 
+    offer_accepted: false, 
+    user_id: currentUserId,
+    user: currentUserId
+     }
+  const [item, setItem] = useState (initialState)
 
-  const handleTitleChange = (e) => {
-    setItemTitle(e.target.value);
-  };
+     const token = localStorage.getItem('access_token')
 
-  const handleDescriptionChange = (e) => {
-    setItemDescription(e.target.value);
-  };
+  const handleChange = (e) => {
+    setItem({ ...item, [e.target.name]: e.target.value})
+  }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit({ item_title: itemTitle, item_description: itemDescription, offer_accepted: false, user: userId, item: null }); // Item ID needs to be provided
-    setItemTitle('');
-    setItemDescription('');
-    setOfferAccepted(false);
+    console.log(item)
+    try{
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/create_swap/${item_id}/`, item, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setItem(initialState);
+      setOfferAccepted(false);
+      console.log('posted')
+    } catch (error){
+      console.log(error)
+    }
+
   };
 
   return (
@@ -38,12 +54,12 @@ function SwapForm({ onSubmit, ownerId }) {
         <h4>Make your offer:</h4>
         <label>
           Item Title:
-          <input type="text" value={itemTitle} onChange={handleTitleChange} />
+          <input type="text" value={item.item_title} id='item_title' name='item_title' onChange={handleChange} />
         </label>
         <br />
         <label>
           Item Description:
-          <textarea value={itemDescription} onChange={handleDescriptionChange} />
+          <textarea value={item.item_description} id='item_description' name='item_description' onChange={handleChange} />
         </label>
         {ownerId === userId && ( 
           <>
@@ -54,7 +70,7 @@ function SwapForm({ onSubmit, ownerId }) {
             </label>
           </>
         )}
-        <input type="hidden" value={userId} /> {/* Provide the user ID as a hidden input */}
+        <input type="hidden" value={currentUserId} /> {/* Provide the user ID as a hidden input */}
         <button type="submit">Submit Offer</button>
       </form>
     </div>
